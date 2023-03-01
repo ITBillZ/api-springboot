@@ -1,4 +1,4 @@
-package cn.itbill.boot.controller;
+package cn.itbill.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestAttribute;
