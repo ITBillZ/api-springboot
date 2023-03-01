@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="cn.itbill.mapper.FoodMapper">
+    <resultMap id="foodResultMap" type="cn.itbill.bean.Food">
+        <id column="food_id" property="food_id"/>
+        <result column="food_title" property="title"/>
+        <result column="category_title" property="category_title"/>
+        <result column="cook_name" property="cook_name"/>
+        <result column="prod_time" property="prod_time"/>
+        <result column="valid_day" property="valid_day"/>
+        <result column="img" property="img"/>
+        <result column="price" property="price"/>
+        <result column="total_number" property="total_number"/>
+        <result column="activate" property="activate"/>
+        <collection property="ingredients" ofType="cn.itbill.bean.Ingredient">
+            <id column="ingredient_id" property="ingredient_id"/>
+            <result column="ingredient_title" property="title"/>
+            <result column="consumption" property="consumption"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectForList" resultMap="foodResultMap">
+        select food_id, title as "food_title", img, price, total_number, activate
+        from foods limit #{offset}, #{pageSize};
+    </select>
+
+    <select id="searchByTitle" resultType="cn.itbill.bean.Food">
+        select food_id, title from foods
+        where title like #{title}
+    </select>
+
+    <select id="selectById" resultMap="foodResultMap">
+        select f.food_id,
+               f.title    as "food_title",
+               cate.title as "category_title",
+               ck.cname   as "cook_name",
+               f.prod_time,
+               f.valid_day,
+               f.img,
+               i.ingredient_id,
+               i.title    as "ingredient_title",
+               fi.consumption,
+               f.price,
+               f.total_number,
+               f.activate
+        from foods f
+                 join food_ingredient fi on f.food_id = fi.food_id
+                 join ingredients i on fi.ingredient_id = i.ingredient_id
+                 join cooks ck on f.cook_id = ck.cook_id
+                 join categories cate on f.category_id = cate.category_id
+        where f.food_id = #{food_id};
+    </select>
+</mapper>

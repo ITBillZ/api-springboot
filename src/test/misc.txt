@@ -1,0 +1,6 @@
+
+
+<!--    <insert id="insert" parameterType="cn.itbill.bean.Plate">-->
+<!--        insert into plates(plate_id, food_id, `time`)-->
+<!--            value (#{plate_id}, #{food_id}, #{time})-->
+<!--    </insert>-->

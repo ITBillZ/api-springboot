@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.itbill.mapper.PlateMapper">
+    <resultMap id="PlateResultMap" type="cn.itbill.bean.Plate">
+        <id column="plate_id" property="plate_id"/>
+        <result column="time" property="time"/>
+        <result column="food_id" property="food_id"/>
+    </resultMap>
+
+    <delete id="deleteById" parameterType="cn.itbill.bean.Plate">
+        delete
+        from plates
+        where plate_id = #{plate_id};
+    </delete>
+
+    <select id="selectById" resultMap="PlateResultMap">
+        select plate_id, food_id, `time`
+        from plates
+        where plate_id = #{plate_id}
+    </select>
+</mapper>
