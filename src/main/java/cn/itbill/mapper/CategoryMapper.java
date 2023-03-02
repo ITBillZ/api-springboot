@@ -1,10 +1,9 @@
 package cn.itbill.mapper;
 
-import cn.itbill.bean.Plate;
+import cn.itbill.bean.Category;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PlateMapper extends BaseMapper<Plate> {
-	void deleteById(Integer plate_id);
+public interface CategoryMapper extends BaseMapper<Category> {
 }

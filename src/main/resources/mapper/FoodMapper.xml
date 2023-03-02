@@ -8,7 +8,6 @@
     <resultMap id="foodResultMap" type="cn.itbill.bean.Food">
         <id column="food_id" property="food_id"/>
         <result column="food_title" property="title"/>
-        <result column="category_title" property="category_title"/>
         <result column="cook_name" property="cook_name"/>
         <result column="prod_time" property="prod_time"/>
         <result column="valid_day" property="valid_day"/>
@@ -16,6 +15,8 @@
         <result column="price" property="price"/>
         <result column="total_number" property="total_number"/>
         <result column="activate" property="activate"/>
+        <result column="cate_1" property="cate_1"/>
+        <result column="cate_2" property="cate_2"/>
         <collection property="ingredients" ofType="cn.itbill.bean.Ingredient">
             <id column="ingredient_id" property="ingredient_id"/>
             <result column="ingredient_title" property="title"/>
@@ -36,7 +37,8 @@
     <select id="selectById" resultMap="foodResultMap">
         select f.food_id,
                f.title    as "food_title",
-               cate.title as "category_title",
+               cate.cate_1,
+               cate.cate_2,
                ck.cname   as "cook_name",
                f.prod_time,
                f.valid_day,

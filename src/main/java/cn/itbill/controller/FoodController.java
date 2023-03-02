@@ -3,9 +3,9 @@ package cn.itbill.controller;
 import cn.itbill.service.FoodService;
 import cn.itbill.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -22,8 +22,8 @@ public class FoodController {
         return new Result(foodService.selectForList(page, pageSize)).toString();
     }
 
-    @RequestMapping("/detail")
-    public String selectById(@RequestParam("food_id") Integer food_id) {
+    @RequestMapping("/{food_id}")
+    public String selectById(@PathVariable Integer food_id) {
         return new Result(foodService.selectById(food_id)).toString();
     }
 

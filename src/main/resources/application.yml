@@ -5,6 +5,7 @@ spring:
       url: jdbc:mysql://175.178.164.43:3306/api-food
       username: api-food
       password: x76aKnY348EAz5hY
-#mybatis-plus:
-#  mapper-locations: classpath:src/main/resources/mapper
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: false
 

@@ -6,6 +6,4 @@ import java.util.List;
 
 public interface PlateService extends IService<Plate>  {
     void update(Integer plate_id, List<Integer> food_ids);
-
-    List<Plate> selectById(int plate_id);
 }

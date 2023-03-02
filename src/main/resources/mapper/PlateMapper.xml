@@ -16,9 +16,4 @@
         where plate_id = #{plate_id};
     </delete>
 
-    <select id="selectById" resultMap="PlateResultMap">
-        select plate_id, food_id, `time`
-        from plates
-        where plate_id = #{plate_id}
-    </select>
 </mapper>
