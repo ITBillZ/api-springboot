@@ -4,5 +4,15 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cn.itbill.mapper.CategoryMapper">
+    <resultMap id="SearchForList" type="cn.itbill.bean.Category">
+        <result column="cate_1" property="cate_1"/>
+        <collection property="cate_2_list" ofType="String">
+            <result column="cate_2"/>
+        </collection>
+    </resultMap>
 
+
+    <select id="searchForList" resultMap="SearchForList">
+        select cate_1, cate_2 from categories;
+    </select>
 </mapper>

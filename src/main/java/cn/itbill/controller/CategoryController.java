@@ -15,7 +15,11 @@ public class CategoryController {
 
     @RequestMapping("/{cate_id}")
     public String selectById(@PathVariable Integer cate_id) {
-        System.out.println(service.getById(cate_id));
         return new Result(service.getById(cate_id)).toString();
+    }
+
+    @RequestMapping("/list")
+    public String searchForList() {
+        return new Result(service.searchForList()).toString();
     }
 }

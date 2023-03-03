@@ -25,8 +25,17 @@
     </resultMap>
 
     <select id="selectForList" resultMap="foodResultMap">
-        select food_id, title as "food_title", img, price, total_number, activate
-        from foods limit #{offset}, #{pageSize};
+        select food_id,
+               title as "food_title",
+               img,
+               cate_1,
+               cate_2,
+               price,
+               total_number,
+               activate
+        from foods f join categories c
+            on f.category_id = c.category_id
+        limit #{offset}, #{pageSize};
     </select>
 
     <select id="searchByTitle" resultType="cn.itbill.bean.Food">
@@ -55,5 +64,30 @@
                  join cooks ck on f.cook_id = ck.cook_id
                  join categories cate on f.category_id = cate.category_id
         where f.food_id = #{food_id};
+    </select>
+
+    <select id="searchByCate" resultMap="foodResultMap">
+        select f.food_id,
+               f.title    as "food_title",
+               cate.cate_1,
+               cate.cate_2,
+               ck.cname   as "cook_name",
+               f.prod_time,
+               f.valid_day,
+               f.img,
+               i.ingredient_id,
+               i.title    as "ingredient_title",
+               fi.consumption,
+               f.price,
+               f.total_number,
+               f.activate
+        from foods f
+                 join food_ingredient fi on f.food_id = fi.food_id
+                 join ingredients i on fi.ingredient_id = i.ingredient_id
+                 join cooks ck on f.cook_id = ck.cook_id
+                 join categories cate on f.category_id = cate.category_id
+        where cate.cate_2 like #{cate}
+
+
     </select>
 </mapper>

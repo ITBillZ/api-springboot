@@ -30,4 +30,9 @@ public class FoodServiceImpl extends ServiceImpl<FoodMapper, Food> implements Fo
 		return mapper.searchByTitle(title);
 	}
 
+	public List<Food> searchByCate(String cate) {
+		cate = "%" + cate + "%";
+		return mapper.searchByCate(cate);
+	}
+
 }

@@ -13,4 +13,6 @@ public interface FoodMapper extends BaseMapper<Food> {
     Food selectById(Integer id);
 
     List<Food> searchByTitle(String title);
+
+    List<Food> searchByCate(String cate);
 }

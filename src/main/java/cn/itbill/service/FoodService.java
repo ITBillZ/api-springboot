@@ -12,4 +12,6 @@ public interface FoodService extends IService<Food> {
     Food selectById(Integer id);
 
     List<Food> searchByTitle(String title);
+
+    List<Food> searchByCate(String cate);
 }

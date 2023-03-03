@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Objects;
+
 @RestController
 @RequestMapping("/food")
 public class FoodController {
@@ -29,13 +31,16 @@ public class FoodController {
 
     @RequestMapping("/search")
     public String search(
-            @RequestParam("title") String title,
+            @RequestParam(value = "title", defaultValue = "") String title,
+            @RequestParam(value = "cate", defaultValue = "") String cate,
             @RequestParam(value = "page", defaultValue = "1") Integer page,
             @RequestParam(value = "size", defaultValue = "10") Integer pageSize) {
-        if (title != null) {
+        if (!Objects.equals(title, "")) {
             return new Result(foodService.searchByTitle(title)).toString();
-        } else {
-            throw new RuntimeException();
         }
+        if (!Objects.equals(cate, "")) {
+            return new Result(foodService.searchByCate(cate)).toString();
+        }
+        return new Result(null).toString();
     }
 }
