@@ -38,10 +38,6 @@
         limit #{offset}, #{pageSize};
     </select>
 
-    <select id="searchByTitle" resultType="cn.itbill.bean.Food">
-        select food_id, title from foods
-        where title like #{title}
-    </select>
 
     <select id="selectById" resultMap="foodResultMap">
         select f.food_id,
@@ -66,7 +62,7 @@
         where f.food_id = #{food_id};
     </select>
 
-    <select id="searchByCate" resultMap="foodResultMap">
+    <select id="searchByTitleOrCate" resultMap="foodResultMap">
         select f.food_id,
                f.title    as "food_title",
                cate.cate_1,
@@ -86,8 +82,16 @@
                  join ingredients i on fi.ingredient_id = i.ingredient_id
                  join cooks ck on f.cook_id = ck.cook_id
                  join categories cate on f.category_id = cate.category_id
-        where cate.cate_2 like #{cate}
 
+        <where>
+            <if test="title != '%%'">
+                or f.title like #{title}
+            </if>
+
+            <if test="cate != '%%'">
+                or cate.cate_2 like #{cate}
+            </if>
+        </where>
 
     </select>
 </mapper>

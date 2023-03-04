@@ -35,11 +35,8 @@ public class FoodController {
             @RequestParam(value = "cate", defaultValue = "") String cate,
             @RequestParam(value = "page", defaultValue = "1") Integer page,
             @RequestParam(value = "size", defaultValue = "10") Integer pageSize) {
-        if (!Objects.equals(title, "")) {
-            return new Result(foodService.searchByTitle(title)).toString();
-        }
-        if (!Objects.equals(cate, "")) {
-            return new Result(foodService.searchByCate(cate)).toString();
+        if (!Objects.equals(title, "") || !Objects.equals(cate, "")) {
+            return new Result(foodService.searchByTitleOrCate(title, cate)).toString();
         }
         return new Result(null).toString();
     }

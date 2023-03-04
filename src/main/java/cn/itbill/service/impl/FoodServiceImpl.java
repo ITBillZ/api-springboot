@@ -25,14 +25,9 @@ public class FoodServiceImpl extends ServiceImpl<FoodMapper, Food> implements Fo
 		return mapper.selectById(id);
 	}
 
-	public List<Food> searchByTitle(String title) {
+	public List<Food> searchByTitleOrCate(String title, String cate) {
 		title = "%" + title + "%";
-		return mapper.searchByTitle(title);
-	}
-
-	public List<Food> searchByCate(String cate) {
 		cate = "%" + cate + "%";
-		return mapper.searchByCate(cate);
+		return mapper.searchByTitleOrCate(title, cate);
 	}
-
 }
